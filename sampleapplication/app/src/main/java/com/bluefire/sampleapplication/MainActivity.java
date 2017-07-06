@@ -109,9 +109,6 @@ public class MainActivity extends Activity {
 				String path = getBooksDirectory() + "/" + bookName;
 				Toast.makeText(MainActivity.this, "Select " + bookName, Toast.LENGTH_SHORT).show();
 
-				// BCLReader Intialization
-				BCLReaderInitializer initializer = new BCLReaderInitializer();
-				initializer.initializeWithApiKey(MainActivity.this, "325c8acc1b8a7da7811f27e6d0a3a3db1a31f055");
 				Intent intent = new Intent(MainActivity.this, ReaderControllerActivity.class);
 				intent.putExtra("path", path);
 				startActivity(intent);

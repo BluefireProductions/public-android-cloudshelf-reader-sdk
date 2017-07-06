@@ -59,6 +59,10 @@ public class ReaderControllerActivity extends FragmentActivity implements
         setContentView(R.layout.reader_controller_activity);
 
         mReaderView = (BCLReaderView) findViewById(R.id.bcl_reader_view);
+
+        // BCLReader Intialization
+        mReaderView.initializeWithApiKey(this, "325c8acc1b8a7da7811f27e6d0a3a3db1a31f055");
+
         String path = getIntent().getStringExtra("path");
         mPath = path;
 
