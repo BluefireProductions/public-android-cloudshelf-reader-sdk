@@ -1,0 +1,344 @@
+<resources>
+
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    -->
+    <!--style name="AppBaseTheme" parent="@style/Theme.AppCompat.Light"-->
+    <style name="AppBaseTheme" parent="@android:style/Theme.Light.NoTitleBar">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+
+
+    <!-- Special styled seekbar for our paging control -->
+    <style name="AppBaseTheme.SeekBar" parent="android:Widget.SeekBar">
+        <item name="android:progressDrawable">@drawable/scrubber_progress_horizontal</item>
+        <item name="android:indeterminateDrawable">@drawable/scrubber_progress_horizontal</item>
+        <item name="android:minHeight">13dip</item>
+        <item name="android:maxHeight">13dip</item>
+        <item name="android:thumb">@drawable/scrubber_control_selector</item>
+        <item name="android:thumbOffset">16dip</item>
+        <item name="android:paddingLeft">16dip</item>
+        <item name="android:paddingRight">16dip</item>
+    </style>
+
+    <!-- Application theme. -->
+
+    <style name="AppTheme.bookInfoTextLarge" parent="android:Widget.TextView">
+        <item name="android:textSize">8pt</item>
+    </style>
+    <style name="AppTheme.bookInfoTextMedium" parent="android:Widget.TextView">
+        <item name="android:textSize">6pt</item>
+    </style>
+    <style name="AppTheme.bookInfoTextSmall" parent="android:Widget.TextView">
+        <item name="android:textSize">4pt</item>
+    </style>
+
+    <style name="AppBaseTheme.HomeList.ItemDate" parent="android:Widget.TextView">
+        <item name="android:layout_marginLeft">5dip</item>
+        <item name="android:layout_marginRight">5dip</item>
+        <item name="android:textColor">@color/list_item_text_light</item>
+        <item name="android:textSize">@dimen/home_date_text</item>
+    </style>
+
+    <style name="AppBaseTheme.HomeList.ItemTitle" parent="android:Widget.TextView">
+        <item name="android:layout_marginLeft">5dip</item>
+        <item name="android:layout_marginRight">5dip</item>
+        <item name="android:textColor">@color/list_item_text_dark</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/home_header_text</item>
+    </style>
+
+    <style name="AppBaseTheme.HomeList.ItemText" parent="android:Widget.TextView">
+        <item name="android:layout_marginLeft">5dip</item>
+        <item name="android:layout_marginRight">5dip</item>
+        <item name="android:textColor">#FF555555</item>
+        <item name="android:textSize">@dimen/home_description_text</item>
+    </style>
+
+    <style name="AppBaseTheme.Shelves.Header" parent="android:Widget">
+        <item name="android:layout_marginTop">5dip</item>
+        <item name="android:layout_marginBottom">0dip</item>
+        <item name="android:layout_marginLeft">10dip</item>
+        <item name="android:layout_marginRight">10dip</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_height">28dip</item>
+        <item name="android:background">#ffffff</item>
+        <item name="android:textColor">@color/list_item_text_blue</item>
+        <item name="android:textSize">@dimen/normal_text</item>
+        <item name="android:textIsSelectable">false</item>
+    </style>
+    <style name="AppBaseTheme.Shelves.Item" parent="android:Widget">
+        <item name="android:layout_marginTop">5dip</item>
+        <item name="android:layout_marginBottom">5dip</item>
+        <item name="android:layout_marginLeft">10dip</item>
+        <item name="android:layout_marginRight">10dip</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_height">80dip</item>
+    </style>
+    <style name="AppBaseTheme.ShelfList.ItemName" parent="android:Widget.TextView">
+        <item name="android:text">Shelf Name</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:layout_marginTop">3dip</item>
+        <item name="android:layout_marginBottom">3dip</item>
+        <item name="android:layout_weight">0</item>
+    </style>
+    <style name="AppBaseTheme.ShelfList.ItemDesc" parent="android:Widget.TextView">
+        <item name="android:text">A description of the shelf (optional)</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:lines">2</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:layout_marginTop">2dip</item>
+        <item name="android:layout_marginBottom">2dip</item>
+    </style>
+
+    <style name="AppBaseTheme.BookGrid.Item" parent="android:Widget">
+        <item name="android:layout_marginTop">5dip</item>
+        <item name="android:layout_marginBottom">5dip</item>
+        <item name="android:layout_marginLeft">10dip</item>
+        <item name="android:layout_marginRight">10dip</item>
+        <item name="android:layout_gravity">bottom|center_horizontal</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+    </style>
+
+    <style name="AppBaseTheme.BookList.Item" parent="android:Widget">
+        <item name="android:layout_marginTop">5dip</item>
+        <item name="android:layout_marginBottom">5dip</item>
+        <item name="android:layout_marginLeft">10dip</item>
+        <item name="android:layout_marginRight">10dip</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_height">@dimen/book_row_height</item>
+    </style>
+    <style name="AppBaseTheme.BookList.ItemAuthor" parent="android:Widget.TextView">
+        <item name="android:text">List of Book Authors</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:lines">1</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:layout_marginTop">2dip</item>
+        <item name="android:layout_marginBottom">2dip</item>
+        <item name="android:textColor">@color/list_item_text_light</item>
+    </style>
+    <style name="AppBaseTheme.BookList.ItemTitle" parent="android:Widget.TextView">
+        <item name="android:text">Book Title</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:layout_marginTop">3dip</item>
+        <item name="android:layout_marginBottom">3dip</item>
+        <item name="android:layout_weight">0</item>
+        <item name="android:textColor">@color/list_item_text_dark</item>
+    </style>
+    <style name="AppBaseTheme.BookList.ItemFormat" parent="android:Widget.TextView">
+        <item name="android:text">Book Format Info</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:lines">1</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:layout_marginTop">2dip</item>
+        <item name="android:layout_marginBottom">2dip</item>
+        <item name="android:textColor">@color/list_item_text_light</item>
+    </style>
+    <style name="AppBaseTheme.BookList.ItemLoanData" parent="android:Widget.TextView">
+        <item name="android:text">Book Format Info</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:lines">1</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:layout_marginTop">2dip</item>
+        <item name="android:layout_marginBottom">2dip</item>
+        <item name="android:textColor">@color/list_item_text_red</item>
+    </style>
+
+    <!-- Last Read Styles (Home Only?)-->
+    <style name="AppBaseTheme.LastRead.ItemTitle" parent="android:Widget.TextView">
+        <item name="android:text">Book Title</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:textSize">@dimen/last_read_title</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginTop">3dip</item>
+        <item name="android:layout_marginBottom">3dip</item>
+        <item name="android:layout_weight">0</item>
+        <item name="android:textColor">@color/list_item_text_dark</item>
+    </style>
+    <style name="AppBaseTheme.LastRead.ItemAuthor" parent="android:Widget.TextView">
+        <item name="android:text">Book Author</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:textSize">@dimen/last_read_author</item>
+        <item name="android:layout_marginTop">3dip</item>
+        <item name="android:layout_marginBottom">3dip</item>
+        <item name="android:layout_weight">0</item>
+        <item name="android:textColor">#FF555555</item>
+    </style>
+    <style name="AppBaseTheme.LastRead.ItemDate" parent="android:Widget.TextView">
+        <item name="android:text">Date: January 12, 2015</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:textSize">@dimen/last_read_meta</item>
+        <item name="android:layout_marginTop">3dip</item>
+        <item name="android:layout_marginBottom">3dip</item>
+        <item name="android:layout_weight">0</item>
+        <item name="android:textColor">@color/list_item_text_light</item>
+    </style>
+    <style name="AppBaseTheme.LastRead.ItemShelf" parent="android:Widget.TextView">
+        <item name="android:text">Shelf: REI</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:textSize">@dimen/last_read_meta</item>
+        <item name="android:layout_marginTop">3dip</item>
+        <item name="android:layout_marginBottom">3dip</item>
+        <item name="android:layout_weight">0</item>
+        <item name="android:textColor">@color/list_item_text_light</item>
+    </style>
+
+    <!-- Settings View Styles -->
+    <style name="AppBaseTheme.Settings" parent="android:Widget.ListView">
+        <!-- item name="android:background">@color/settings_background</item-->
+        <item name="android:background">@drawable/settings_drop_shadow</item>
+        <item name="android:paddingTop">50dip</item>
+        <item name="android:paddingLeft">5dip</item>
+        <item name="android:paddingRight">5dip</item>
+        <item name="android:layout_width">300dip</item>
+        <item name="android:layout_weight">0</item>
+    </style>
+    <style name="AppBaseTheme.Settings.Spacer">
+        <item name="android:background">#00000000</item>
+        <item name="android:layout_weight">5</item>
+    </style>
+    <style name="AppBaseTheme.Settings.SectionTitle" parent="android:Widget.TextView">
+        <item name="android:text">Section Title</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">bottom</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:layout_marginTop">3dip</item>
+        <item name="android:layout_marginBottom">0dip</item>
+        <item name="android:layout_weight">0</item>
+    </style>
+    <style name="AppBaseTheme.Settings.ItemName" parent="android:Widget.TextView">
+        <item name="android:text">Setting Name</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:layout_marginTop">3dip</item>
+        <item name="android:layout_marginBottom">3dip</item>
+        <item name="android:layout_weight">0</item>
+    </style>
+    <style name="AppBaseTheme.Settings.ItemDesc" parent="android:Widget.TextView">
+        <item name="android:text">A description of the setting (optional)</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:lines">2</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:layout_marginTop">2dip</item>
+        <item name="android:layout_marginBottom">2dip</item>
+    </style>
+    <style name="AppBaseTheme.Settings.Item" parent="android:Widget">
+        <item name="android:layout_marginTop">5dip</item>
+        <item name="android:layout_marginBottom">5dip</item>
+        <item name="android:layout_marginLeft">10dip</item>
+        <item name="android:layout_marginRight">10dip</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_height">80dip</item>
+    </style>
+
+    <style name="AppBaseTheme.InfoView.LargeHeading" parent="android:Widget.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:lines">1</item>
+        <item name="android:textSize">@dimen/large_heading_text</item>
+        <item name="android:textColor">@color/info_text_color</item>
+    </style>
+
+    <style name="AppBaseTheme.InfoView.Heading" parent="android:Widget.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:lines">1</item>
+        <item name="android:textSize">@dimen/heading_text</item>
+        <item name="android:textColor">@color/info_text_color</item>
+    </style>
+
+    <style name="AppBaseTheme.InfoView.SectionTitle" parent="android:Widget.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:lines">1</item>
+        <item name="android:textSize">@dimen/section_text</item>
+        <item name="android:textColor">@color/info_text_color</item>
+    </style>
+    <style name="AppBaseTheme.InfoView.Text" parent="android:Widget.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/normal_text</item>
+        <item name="android:textColor">@color/info_text_color</item>
+    </style>
+
+
+    <style name="AppBaseTheme.Locations.Header" parent="android:Widget">
+        <item name="android:layout_marginTop">5dip</item>
+        <item name="android:layout_marginBottom">0dip</item>
+        <item name="android:layout_marginLeft">10dip</item>
+        <item name="android:layout_marginRight">10dip</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_height">28dip</item>
+        <item name="android:background">#ffffff</item>
+        <item name="android:textColor">@color/list_item_text_blue</item>
+        <item name="android:textSize">@dimen/normal_text</item>
+        <item name="android:textIsSelectable">false</item>
+    </style>
+    <style name="AppBaseTheme.Locations.Item" parent="android:Widget">
+        <item name="android:layout_marginTop">5dip</item>
+        <item name="android:layout_marginBottom">5dip</item>
+        <item name="android:layout_marginLeft">10dip</item>
+        <item name="android:layout_marginRight">10dip</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_height">50dip</item>
+    </style>
+    <style name="AppBaseTheme.Locations.ItemName" parent="android:Widget.TextView">
+        <item name="android:text">Location List Item</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:layout_marginTop">3dip</item>
+        <item name="android:layout_marginBottom">3dip</item>
+        <item name="android:layout_weight">0</item>
+    </style>
+    <style name="AppBaseTheme.Locations.Bookmark.Item" parent="android:Widget">
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_height">80dip</item>
+    </style>
+
+    <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">false</item>
+    </style>
+
+    <style name="simple_list_item_style">
+        <item name="android:textAppearance">@android:style/TextAppearance.Medium</item>
+        <item name="android:paddingLeft">6dip</item>
+        <item name="android:paddingRight">6dip</item>
+        <item name="android:minHeight">48dip</item>
+    </style>
+
+</resources>

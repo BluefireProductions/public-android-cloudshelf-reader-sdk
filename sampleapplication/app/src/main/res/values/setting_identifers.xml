@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Resources for tracking setting identifiers (such as for toggle switches)
+	we keep the identifier values here to make them easily identifiable in code
+	and to keep them independant of the need to re-parse the settings list every time 
+-->
+<resources>
+    <!-- List Visibility -->
+    <string name="id_setting_disp_all_books">DISPLAY_ALL_BOOKS</string>
+    <string name="id_setting_disp_downloaded">DISPLAY_DOWNLOADED</string>
+    <!-- List Sort -->
+    <string name="id_setting_sort_recent">SORT_RECENT</string>
+    <string name="id_setting_sort_title">SORT_TITLE</string>
+    <string name="id_setting_sort_author">SORT_AUTHOR</string>
+    
+    <!-- Action Flags (for list click actions) -->
+    <string name="flag_action_goto_page">GOTO_PAGE</string>
+</resources>

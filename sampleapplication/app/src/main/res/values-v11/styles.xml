@@ -1,0 +1,27 @@
+<resources>
+
+    <!--
+        Base application theme for API 11+. This theme completely replaces
+        AppBaseTheme from res/values/styles.xml on API 11+ devices.
+    -->
+    <!--<style name="AppBaseTheme" parent="@style/Theme.AppCompat.Light">-->
+    <style name="AppBaseTheme" parent="android:Theme.Holo.Light">
+
+    <!-- API 11 theme customizations can go here. -->
+    </style>
+
+
+    <style name="ReadTabHostTheme" parent="android:Theme.Holo.Light">
+        <!-- API 11 theme customizations can go here. -->
+        <item name="android:windowActionBarOverlay">true</item>
+
+
+    </style>
+
+    <style name="AppBaseTheme.SeekBar" parent="android:Widget.Holo.SeekBar">
+        <item name="android:progressDrawable">@drawable/scrubber_progress_horizontal</item>
+        <item name="android:indeterminateDrawable">@drawable/scrubber_progress_horizontal</item>
+        <item name="android:thumb">@drawable/scrubber_control_selector</item>
+    </style>
+
+</resources>

@@ -1,0 +1,138 @@
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    overflow: hidden;
+    box-sizing:border-box;
+    -moz-box-sizing:border-box; /* Firefox */
+    -webkit-box-sizing:border-box; /* Safari */
+}
+
+iframe {
+    border-width: 0;
+}
+
+#viewport {
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    overflow: auto; /* pan-zoom feature, fixed layout pages */
+}
+
+
+/*Fixed layout */
+
+body.fixed-layout {
+    background-color: #5c5c5c;
+}
+
+.fixed-book-frame {
+    position: absolute !important;
+}
+
+
+
+.iframe-fixed {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+}
+
+
+/*Reflowable layout*/
+
+#reflowable-book-frame {
+    position: absolute !important;
+    left:0;
+    top:0;
+    right: 0;
+    bottom: 0;
+}
+
+#reflowable-content-frame {
+    position: absolute !important;
+    opacity: 1;
+    visibility: visible;
+}
+
+.content-doc-frame {
+    position: relative !important;
+}
+
+/*Classes to use for styling the book*/
+
+/*book*/
+.book-frame {
+
+}
+
+.fixed-book-frame {
+
+}
+
+/*fixed layout frames only*/
+.fixed-page-frame, .fixed-page-frame-left, .fixed-page-frame-right, .fixed-page-frame-center {
+    position: absolute !important;
+}
+
+.fixed-page-frame-left {
+
+}
+
+.fixed-page-frame-right {
+    z-index: 2;
+}
+
+.fixed-page-frame-center {
+
+}
+
+/*reflowable layout*/
+.reflowable-book-frame {
+
+}
+
+.reflowable-content-frame {
+
+}
+
+.mo-active-default {
+
+}
+
+html {
+    height: 100%;
+    margin: 0;
+    -webkit-text-size-adjust: 100%; /* Never autoresize text */
+}
+
+/* Remove grey tap highlight in WebKit */
+input, textarea, button, select, a, html, body, div {
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+html[data-text-align="justified"], html[data-text-align="justified"] body, html[data-text-align="justified"] div, html[data-text-align="justified"] span, html[data-text-align="justified"] h1, html[data-text-align="justified"] h2, html[data-text-align="justified"] h3, html[data-text-align="justified"] h4, html[data-text-align="justified"] h5, html[data-text-align="justified"] h6, html[data-text-align="justified"] p, html[data-text-align="justified"] blockquote, html[data-text-align="justified"] pre, html[data-text-align="justified"] a, html[data-text-align="justified"] abbr, html[data-text-align="justified"] acronym, html[data-text-align="justified"] address, html[data-text-align="justified"] big, html[data-text-align="justified"] cite, html[data-text-align="justified"] code, html[data-text-align="justified"] em, html[data-text-align="justified"] small, html[data-text-align="justified"] strike, html[data-text-align="justified"] strong, html[data-text-align="justified"] sub, html[data-text-align="justified"] sup, html[data-text-align="justified"] b, html[data-text-align="justified"] u, html[data-text-align="justified"] i, html[data-text-align="justified"] center, html[data-text-align="justified"] dl, html[data-text-align="justified"] dt, html[data-text-align="justified"] dd, html[data-text-align="justified"] ol, html[data-text-align="justified"] ul, html[data-text-align="justified"] li, html[data-text-align="justified"] fieldset, html[data-text-align="justified"] form, html[data-text-align="justified"] label, html[data-text-align="justified"] legend, html[data-text-align="justified"] table, html[data-text-align="justified"] caption, html[data-text-align="justified"] tbody, html[data-text-align="justified"] tfoot, html[data-text-align="justified"] thead, html[data-text-align="justified"] tr, html[data-text-align="justified"] th, html[data-text-align="justified"] td, html[data-text-align="justified"] article, html[data-text-align="justified"] aside, html[data-text-align="justified"] footer, html[data-text-align="justified"] header, html[data-text-align="justified"] nav, html[data-text-align="justified"] section {
+    text-align: justify !important;
+}
+
+html[data-text-align="left"], html[data-text-align="left"] body, html[data-text-align="left"] div, html[data-text-align="left"] span, html[data-text-align="left"] h1, html[data-text-align="left"] h2, html[data-text-align="left"] h3, html[data-text-align="left"] h4, html[data-text-align="left"] h5, html[data-text-align="left"] h6, html[data-text-align="left"] p, html[data-text-align="left"] blockquote, html[data-text-align="left"] pre, html[data-text-align="left"] a, html[data-text-align="left"] abbr, html[data-text-align="left"] acronym, html[data-text-align="left"] address, html[data-text-align="left"] big, html[data-text-align="left"] cite, html[data-text-align="left"] code, html[data-text-align="left"] em, html[data-text-align="left"] small, html[data-text-align="left"] strike, html[data-text-align="left"] strong, html[data-text-align="left"] sub, html[data-text-align="left"] sup, html[data-text-align="left"] b, html[data-text-align="left"] u, html[data-text-align="left"] i, html[data-text-align="left"] center, html[data-text-align="left"] dl, html[data-text-align="left"] dt, html[data-text-align="left"] dd, html[data-text-align="left"] ol, html[data-text-align="left"] ul, html[data-text-align="left"] li, html[data-text-align="left"] fieldset, html[data-text-align="left"] form, html[data-text-align="left"] label, html[data-text-align="left"] legend, html[data-text-align="left"] table, html[data-text-align="left"] caption, html[data-text-align="left"] tbody, html[data-text-align="left"] tfoot, html[data-text-align="left"] thead, html[data-text-align="left"] tr, html[data-text-align="left"] th, html[data-text-align="left"] td, html[data-text-align="left"] article, html[data-text-align="left"] aside, html[data-text-align="left"] footer, html[data-text-align="left"] header, html[data-text-align="left"] nav, html[data-text-align="left"] section {
+    text-align: left !important;
+}
+
+
+html[data-theme="night-theme"] {
+    background-color: #141414;
+    color: white;
+}
+/*html[data-theme="default-theme"] {
+    background-color: white;
+    color: black;
+}*/
+html[data-theme="parchment-theme"] {
+background-color: #e7dec7;
+    color: #5d4232;
+}

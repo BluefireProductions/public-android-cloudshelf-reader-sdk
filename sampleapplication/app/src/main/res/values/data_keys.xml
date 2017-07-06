@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This resource file contains keys for stored values in shared preferences -->
+<resources>
+	<string name="pref_text_size">com.bluefire.cloudshelf.settings.text_size</string>
+	<string name="pref_margin_width">com.bluefire.cloudshelf.settings.margin_width</string>
+	<string name="pref_justified_text">com.bluefire.cloudshelf.settings.justified_text</string>
+	<string name="pref_column_mode">com.bluefire.cloudshelf.settings.column_mode</string>
+	<string name="pref_theme">com.bluefire.cloudshelf.settings.theme</string>
+	<string name="pref_tap_to_play">com.bluefire.cloudshelf.settings.tap_to_play</string>
+
+	<!-- unused preferences -->
+     <string name="pref_user_settings_enabled">com.bluefire.cloudshelf.settings.advanced</string>
+     <string name="pref_night_mode">com.bluefire.cloudshelf.settings.night_mode</string>
+	 <string name="pref_font">com.bluefire.cloudshelf.settings.font</string>
+	 <string name="pref_line_spacing">com.bluefire.cloudshelf.settings.line_spacing</string>
+	 <string name="pref_show_page_number">com.bluefire.cloudshelf.settings.show_page_number</string>
+	 <string name="pref_requested_rotation">com.bluefire.cloudshelf.settings.requested_rotation</string>
+	 <string name="pref_requested_screensaver_setting">com.bluefire.cloudshelf.settings.requested_screensaver_setting</string>
+	 <string name="pref_align">com.bluefire.cloudshelf.settings.align</string>
+	 <string name="pref_page_turn">com.bluefire.cloudshelf.settings.page_turn</string>
+	 <string name="pref_brightness">com.bluefire.cloudshelf.settings.brightness</string>
+	 <string name="pref_study_tools">com.bluefire.cloudshelf.settings.study_tools</string>
+	 <string name="pref_volume">com.bluefire.cloudshelf.settings.volume</string>
+	 <string name="pref_audio_tempo">com.bluefire.cloudshelf.settings.audo_tempo</string>
+	 <string name="pref_read_along_color">com.bluefire.cloudshelf.settings.read_along_color</string>
+	 <string name="pref_auto_page_turn_text">com.bluefire.cloudshelf.settings.auto_page_turn_text</string>	 
+	 
+	 <!-- Book List Preferences -->
+	 <string name="pref_list_disp_option">com.bluefire.cloudshelf.settings.display_option</string>
+	 <string name="pref_sort_option">com.bluefire.cloudshelf.settings.sort_option</string>
+	 
+	 <!-- Stored cursor keys -->
+	 <string name="pref_shelf_cursor">com.bluefire.cloudshelf.cursors.shelf</string>
+	 
+	 <!-- Unrelated to Settings. Simple stored values. Some may be moved to the database. -->
+	 <string name="pref_last_book_read">com.bluefire.cloudshelf.settings.last_book_read</string>
+	 <string name="pref_last_book_info_shown">com.bluefire.cloudshelf.settings.last_book_info_shown</string>
+	 <string name="pref_last_shelf_type">com.bluefire.cloudshelf.settings.last_shelf_type</string>
+	 <string name="pref_last_shelf_shown">com.bluefire.cloudshelf.settings.last_shelf_shown</string>
+	 <string name="pref_last_backup_shelf_type">com.bluefire.cloudshelf.settings.last_backup_shelf_shown</string>
+	 <string name="pref_gallery_mode">com.bluefire.cloudshelf.settings.gallery_mode</string>
+</resources>

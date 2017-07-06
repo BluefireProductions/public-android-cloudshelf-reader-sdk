@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item>
+      <shape 
+        android:shape="rectangle">
+            <solid android:color="#FFF0652E" />
+            <padding android:left="@dimen/ribbon_bands"/>
+            <size android:width="@dimen/ribbon_bands"/>
+        </shape>
+   </item>
+
+   <item>
+      <shape 
+        android:shape="rectangle">
+            <solid android:color="#FF05477A" />
+            <padding android:left="@dimen/ribbon_bands"/>
+            <size android:width="@dimen/ribbon_bands"/>
+        </shape>
+   </item>
+
+    <item>
+      <shape 
+        android:shape="rectangle">
+            <solid android:color="#FF4466AC" />
+            <padding android:left="@dimen/ribbon_bands"/>
+            <size android:width="@dimen/ribbon_bands"/>
+        </shape>
+   </item>
+   
+   <item>
+      <shape 
+        android:shape="rectangle">
+            <solid android:color="#FF3DA2F0" />
+            <padding android:left="@dimen/ribbon_bands"/>
+            <size android:width="@dimen/ribbon_bands"/>
+        </shape>
+   </item>
+
+   <item>
+      <shape 
+        android:shape="rectangle">
+            <solid android:color="#FFB3DD58" />
+            <padding android:left="@dimen/ribbon_bands"/>
+            <size android:width="@dimen/ribbon_bands"/>
+        </shape>
+   </item>
+</layer-list>

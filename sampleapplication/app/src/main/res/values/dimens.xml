@@ -1,0 +1,60 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+
+    <dimen name="gallery_book_thumb_height">120dip</dimen>
+    <dimen name="gallery_book_thumb_width">70dip</dimen>
+    <dimen name="gallery_book_image_width">60dip</dimen>
+    <dimen name="download_icon_size">25dip</dimen>
+
+    <dimen name="info_view_width">300dip</dimen>
+    <dimen name="info_logo_width">50dip</dimen>
+    <dimen name="info_logo_height">50dip</dimen>
+    <dimen name="large_heading_text">20sp</dimen>
+    <dimen name="heading_text">14sp</dimen>
+    <dimen name="section_text">12sp</dimen>
+    <dimen name="normal_text">12sp</dimen>
+    <dimen name="small_text">10sp</dimen>
+
+    <!-- Home Fragment Settings -->
+    <dimen name="home_date_text">13sp</dimen>
+    <dimen name="home_header_text">18sp</dimen>
+    <dimen name="home_description_text">14sp</dimen>
+    <dimen name="last_read_title">15sp</dimen>
+    <dimen name="last_read_author">13sp</dimen>
+    <dimen name="last_read_meta">11sp</dimen>
+
+    <!-- Landing Settings -->
+    <dimen name="landing_button_margin">1dip</dimen>
+    <dimen name="landing_button_padding">1dip</dimen>
+    <dimen name="landing_button_text_size">12sp</dimen>
+    <dimen name="landing_button_bar_height">50dip</dimen>
+
+    <dimen name="ribbon_bands">5dip</dimen>
+    <dimen name="ribbon_width">25dip</dimen>
+    <dimen name="landing_logo_height">50dip</dimen>
+    <dimen name="landing_display_size">250dip</dimen>
+    <dimen name="landing_text_size">15sp</dimen>
+    <dimen name="landing_text_margin">10dip</dimen>
+    <dimen name="landing_logo_margin">15dip</dimen>
+
+    <!-- Generic List Settings -->
+    <dimen name="group_header_text_size">10sp</dimen>
+
+    <!-- Progress Spinner Dimensions -->
+    <dimen name="prog_spn_buffer">10dip</dimen>
+    <dimen name="prog_spn_bak">20dip</dimen>
+    <dimen name="prog_spn_fore">17dip</dimen>
+    <dimen name="prog_spn_width">8dip</dimen>
+
+    <!-- Book List Item Size -->
+    <dimen name="book_row_height">80dip</dimen>
+    <dimen name="book_thumb_height">70dip</dimen>
+    <dimen name="cloud_icon_height">25dip</dimen>
+    <dimen name="book_list_info_btn_height">40dip</dimen>
+    <dimen name="book_list_info_icn_height">35dip</dimen>
+
+</resources>

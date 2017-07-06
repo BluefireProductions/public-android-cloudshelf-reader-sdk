@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Color setting for hiding a color region/making it clear -->
+    <color name="invisible">#00000000</color>
+    
+    <!-- Colors for the reading view -->
+	<color name="book_page_slider_background">#FF4197D3</color>
+	<color name="book_page_slider_widget_border">#FFFFFFFF</color>
+	<color name="book_page_slider_widget_fill">#FFCCCCCC</color>
+	<color name="book_page_number_text">#FFFFFFFF</color>
+	<color name="book_page_number_background">#EE000000</color>
+	<color name="book_margin_color">#FFFFFFFF</color>
+
+	<color name="option_list_background_color">#FFC0C0C0</color>
+	<color name="option_list_text_color">#FF000000</color>
+	<color name="option_list_option_color">#FFFFFF</color>
+	
+	<!-- Settings view colors -->
+	<color name="settings_background">#FFFFFFFF</color>
+	<color name="navi_background">#FFFFFFFF</color>
+	<color name="locations_dash_background">#FFFFFFFF</color>
+	
+	<!-- List Text Colors -->
+	<color name="list_item_text_dark">#FF000000</color>
+	<color name="list_item_text_light">#FFC0C0C0</color>
+	<color name="list_item_underline_light">#FFC0C0C0</color>
+	<color name="list_item_text_red">#FFFF0000</color>
+	<color name="list_item_text_blue">#FF000080</color>
+	<color name="list_item_underline_blue">#FF000080</color>
+	<color name="list_section_header_text">#FF000000</color>
+	<color name="list_section_header_background">#FFC8C8C8</color>
+	
+	<!-- Generic Info screen colors -->
+	<color name="info_background">#FF383838</color>
+	<color name="info_text_color">#FFFFFFFF</color>
+	<color name="info_grey_text">#FFC8C8C8</color>
+	<color name="thin_grey_line">#FFC8C8C8</color>
+	<color name="thin_white_line">#FFFFFF</color>
+	
+	<!-- Spinner Colors -->
+	<color name="progress_background">#88FFFFFF</color>
+	<color name="progress_foreground">#FF7777F0</color>
+	<color name="progress_forground_mid_gradient">#807777F0</color>
+	<color name="progress_forground_gone_gradient">#007777F0</color>
+</resources>

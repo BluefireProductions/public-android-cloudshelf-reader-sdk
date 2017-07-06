@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+	<item
+	    android:id="@+id/menu_text_highlight"
+        android:orderInCategory="50"
+        android:showAsAction="always"
+        android:title="Highlight"
+        android:visible="true" 
+	/>
+    <!--<item-->
+        <!--android:id="@+id/menu_text_copy"-->
+        <!--android:orderInCategory="50"-->
+        <!--android:showAsAction="always"-->
+        <!--android:title="Copy"-->
+        <!--android:visible="true" -->
+    <!--/>-->
+    <!--<item-->
+        <!--android:id="@+id/menu_text_define"-->
+        <!--android:orderInCategory="50"-->
+        <!--android:showAsAction="always"-->
+        <!--android:title="Define"-->
+        <!--android:visible="true" -->
+    <!--/>-->
+    <!--<item-->
+        <!--android:id="@+id/menu_text_note"-->
+        <!--android:orderInCategory="50"-->
+        <!--android:showAsAction="always"-->
+        <!--android:title="Note"-->
+        <!--android:visible="true" -->
+    <!--/>-->
+    <!--<item-->
+        <!--android:id="@+id/menu_text_bookmark"-->
+        <!--android:orderInCategory="50"-->
+        <!--android:showAsAction="always"-->
+        <!--android:title="Bookmark"-->
+        <!--android:visible="true" -->
+    <!--/>-->
+    <!--<item-->
+        <!--android:id="@+id/menu_text_share"-->
+        <!--android:orderInCategory="50"-->
+        <!--android:showAsAction="always"-->
+        <!--android:title="Share"-->
+        <!--android:visible="true" -->
+    <!--/>-->
+    
+</menu>

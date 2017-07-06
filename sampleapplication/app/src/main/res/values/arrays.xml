@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Settings View Objects -->
+    <!--  Definition of tags
+            disp_name: Name of the setting
+                 desc: Description of the setting (optional)
+                class: the xml layout file for this setting type
+             advanced: show only in advanced settings mode?    
+             data_key: key for stored value in shared preferences
+           fixed_mode: true if accessible in fixed width mode (some features are not)
+              default: the default value for this control
+                  max: maximum value for this field (for seekbar)
+            array_res: the array resource for spinner objects
+    -->
+    <string-array name="settings_items">
+        <item>{disp_name:\"@string/settings_text_size_title\", class:\"@layout/settings_list_item_plus_minus\", advanced:false, data_key:\"@string/pref_text_size\", fixed_mode:false, default:0}</item>
+        <item>{disp_name:\"@string/settings_margin_width_title\", class:\"@layout/settings_list_item_plus_minus\", advanced:false, data_key:\"@string/pref_margin_width\", fixed_mode:false, default:0}</item>
+        <item>{disp_name:\"@string/settings_justified_text_title\", class:\"@layout/settings_list_item_switch\", advanced:false, data_key:\"@string/pref_justified_text\", fixed_mode:false, default:false}</item>
+        <item>{disp_name:\"@string/settings_column_mode_title\", class:\"@layout/settings_list_item_radio_group\", advanced:false, data_key:\"@string/pref_column_mode\", fixed_mode:false, default:0, array_res:\"@array/book_column_modes\"}</item>
+        <item>{disp_name:\"@string/settings_theme_title\", class:\"@layout/settings_list_item_radio_group\", advanced:false, data_key:\"@string/pref_theme\", fixed_mode:false, default:0, array_res:\"@array/book_themes\"}</item>
+        <item>{disp_name:\"@string/settings_tap_to_play_title\", class:\"@layout/settings_list_item_switch\", advanced:false, data_key:\"@string/pref_tap_to_play\", fixed_mode:false, default:true}</item>
+    </string-array>
+
+
+    <!--  Book Theme Objects
+    	Definition of tags
+                 name: Display name of the theme
+    -->
+    <string-array name="book_themes">
+        <item>{name:\"@string/theme_name_default\", identifier:\"@string/identifier_theme_default\"}</item>
+        <item>{name:\"@string/theme_name_night\", identifier:\"@string/identifier_theme_night\"}</item>
+        <item>{name:\"@string/theme_name_sepia\", identifier:\"@string/identifier_theme_sepia\"}</item>
+    </string-array>
+    <string-array name="book_column_modes">
+        <item>{name:\"@string/column_mode_default\", identifier:\"@string/identifier_column_mode_default\"}</item>
+        <item>{name:\"@string/column_mode_single\", identifier:\"@string/identifier_column_mode_single\"}</item>
+        <item>{name:\"@string/column_mode_double\", identifier:\"@string/identifier_column_mode_double\"}</item>
+    </string-array>
+
+
+
+    <!-- Sort View Objects -->
+    <!--  Definition of tags
+            disp_name: Name of the setting (optional)
+                class: the xml layout file for this setting type  
+       bookshelf_only: true for values that only appear on the book settings view (not the downloads view) 
+             data_key: key for stored value in shared preferences
+              default: the default value for this control
+            array_res: the array resource for spinner objects
+    -->
+    <string-array name="sort_items">
+        <item>{disp_name:\"@string/settings_sort_title\", class:\"@layout/setting_section_title\", divider_color:\"@color/list_item_underline_blue\", bookshelf_only:true}</item>
+        <item>{disp_name:\"@string/settings_show_book_title\", class:\"@layout/setting_section_title\", divider_color:\"@color/invisible\", bookshelf_only:true}</item>
+        <item>{disp_name:\"@string/display_all_books\", class:\"@layout/settings_list_item_checkable\", bookshelf_only:true, data_key:\"@string/pref_list_disp_option\", identifier:\"@string/id_setting_disp_all_books\", default:\"@string/id_setting_disp_all_books\"}</item>
+        <item>{disp_name:\"@string/display_downloaded\", class:\"@layout/settings_list_item_checkable\", bookshelf_only:true, data_key:\"@string/pref_list_disp_option\", identifier:\"@string/id_setting_disp_downloaded\", default:\"@string/id_setting_disp_all_books\"}</item>
+        <item>{disp_name:\"@string/sort_recent\", class:\"@layout/settings_list_item_checkable\", data_key:\"@string/pref_sort_option\", bookshelf_only:false, identifier:\"@string/id_setting_sort_recent\", default:\"@string/id_setting_sort_title\"}</item>
+        <item>{disp_name:\"@string/sort_title\", class:\"@layout/settings_list_item_checkable\", data_key:\"@string/pref_sort_option\", bookshelf_only:false, identifier:\"@string/id_setting_sort_title\", default:\"@string/id_setting_sort_title\"}</item>
+        <item>{disp_name:\"@string/sort_author\", class:\"@layout/settings_list_item_checkable\", data_key:\"@string/pref_sort_option\", bookshelf_only:false, identifier:\"@string/id_setting_sort_author\", default:\"@string/id_setting_sort_title\"}</item>
+    </string-array>
+    
+    <!-- Book List Display Options
+    	Definition of tags
+                 name: Display name of the display option
+                index: The associated index (which matches its integer value in BookSettings.java)
+    -->
+    <string-array name="book_list_display_options">
+        <item>{name:\"@string/display_all_books\", identifier:\"@string/id_setting_disp_all_books\"}</item>
+        <item>{name:\"@string/display_downloaded\", identifier:\"@string/id_setting_disp_downloaded\"}</item>
+    </string-array>
+
+    <!-- Book List Sort Options
+    	Definition of tags
+                 name: Display name of the sort option
+                index: The associated index (which matches its integer value in BookSettings.java)
+    -->
+    <string-array name="book_list_sort_options">
+        <item>{name:\"@string/sort_recent\", identifier:\"@string/id_setting_sort_recent\"}</item>
+        <item>{name:\"@string/sort_title\", identifier:\"@string/id_setting_sort_title\"}</item>
+        <item>{name:\"@string/sort_author\", identifier:\"@string/id_setting_sort_author\"}</item>
+    </string-array>
+    
+    <!-- Bookmark/Location sort options -->
+    <string-array name="location_sort_options">
+        <item>@string/sort_by_date</item>
+        <item>@string/sort_by_chapter</item>
+        <item>@string/sort_by_color</item>
+    </string-array>
+    
+    <!--  Page Animation Objects
+    	Definition of tags
+                 name: Display name of the animation
+                index: The associated index (which matches its integer value in BookSettings.java)
+    -->
+    <string-array name="page_animations">
+        <item>{name:\"@string/transition_slide\", index:0}</item>
+        <item>{name:\"@string/transition_fade\", index:1}</item>
+    </string-array>
+
+    <!-- Array for storing the list of location items in the locations dashboard 
+        	Definition of tags
+                 name: Display name of the location
+         iconResource: The integer resource for this location list item
+        fragmentClass: The full class name of the associated fragment (optional)
+             actionId: Alternately provide a system identifier to signify a different action
+    -->
+    <string-array name="location_panel">
+        <item>{name:\"@string/loc_dash_table_of_contents\", fragmentClass:\"com.bluefire.cloudshelf.fragments.BookContentsFragment\", iconResource:\"@drawable/locations_toc\"}</item>
+        <item>{name:\"@string/loc_dash_notes\", fragmentClass:\"com.bluefire.cloudshelf.fragments.BookmarksFragment\", locationType:"NOTE", iconResource:\"@drawable/locations_notes\"}</item>
+        <item>{name:\"@string/loc_dash_highlights\", fragmentClass:\"com.bluefire.cloudshelf.fragments.BookmarksFragment\", locationType:"HIGHLIGHT", iconResource:\"@drawable/locations_highlights\"}</item>
+        <item>{name:\"@string/loc_dash_bookmarks\", fragmentClass:\"com.bluefire.cloudshelf.fragments.BookmarksFragment\", locationType:"BOOKMARK", iconResource:\"@drawable/locations_bookmark\"}</item>
+        <item>{name:\"@string/loc_dash_book_info\", fragmentClass:\"com.bluefire.cloudshelf.fragments.BookInfoFragment\", iconResource:\"@drawable/locations_bookinfo\"}</item>
+        <!--<item>{name:\"@string/loc_dash_goto_page\", actionId:\"@string/flag_action_goto_page\", iconResource:\"@drawable/locations_goto_page\"}</item>-->
+    </string-array>
+    
+</resources>
