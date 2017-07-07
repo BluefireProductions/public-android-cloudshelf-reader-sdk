@@ -66,32 +66,29 @@ public class ReaderControllerActivity extends FragmentActivity implements
         String path = getIntent().getStringExtra("path");
         mPath = path;
 
+
         // Settings
         BCLReaderSettings.BCLReaderColumnMode columnMode = BCLReaderSettings.BCLReaderColumnMode.BCL_READER_COLUMN_MODE_DEFAULT;
         boolean isMediaOverlayTapToPlayEnabled = true;
         boolean isTextAlignmentJustified = false;
         int marginAmount = 0;
         int textScale = 100;
-        BCLReaderSettings.BCLReaderTheme theme = BCLReaderSettings.BCLReaderTheme.BCL_READER_THEME_NIGHT;
+        BCLReaderSettings.BCLReaderTheme theme = BCLReaderSettings.BCLReaderTheme.BCL_READER_THEME_DEFAULT;
         BCLReaderSettings settings = new BCLReaderSettings(columnMode, isMediaOverlayTapToPlayEnabled, isTextAlignmentJustified, marginAmount, textScale, theme);
 
         // Highlights
-//        List<BCLHighlight> highlights = new ArrayList<>();
-
-        // Highlights
         List<BCLHighlight> highlights = new ArrayList<>();
-        highlights.add(new BCLHighlight(UUID.randomUUID().toString(), new BCLLocation("epub_Hatadochalskad-4", "/4[epub_Hatadochalskad]/2/6,/1:590,/1:596")));
-
-        // Location to open book to
-        BCLLocation location = new BCLLocation("epub_Hatadochalskad-10", "/4[epub_Hatadochalskad]/2/12,/1:1254,/1:1255");
 
 
         // Initialize with book path
-//        mReaderView.initWithBookPath(path, settings, highlights, location);
-        mReaderView.initWithBookPath(path);
-        mReaderView.useCFILocations(true);
+        BCLLocation locationToOpen = new BCLLocation("cover", "/4/2");
 
+//        mReaderView.initWithBookPath(path, settings, highlights, locationToOpen);
+        mReaderView.initWithBookPath(path);
+
+        mReaderView.useCFILocations(false);
         mLocationClickoffView = (FrameLayout) findViewById(R.id.location_panel_clickoff);
+
 
         // Settings
         mViewerSettings = settings;
@@ -115,6 +112,16 @@ public class ReaderControllerActivity extends FragmentActivity implements
 
         RelativeLayout settingsFragmentWrapper = (RelativeLayout) findViewById(R.id.settings_fragment_wrapper);
         settingsFragmentWrapper.setVisibility(View.GONE);
+
+        // Inflate correct settings into settings fragment wrapper (either reflowable or FXL)
+        View v;
+        boolean isFixedLayout = mReaderView.isFixedLayout();
+        if (isFixedLayout) {
+            v = getLayoutInflater().inflate(R.layout.viewer_settings_fixed_layout, null);
+        } else {
+            v = getLayoutInflater().inflate(R.layout.viewer_settings, null);
+        }
+        settingsFragmentWrapper.addView(v);
 
         // Wire up location panel clickoff (to hide settings, etc)
         FrameLayout locationPanelClickoff = (FrameLayout) findViewById(R.id.location_panel_clickoff);
@@ -209,9 +216,6 @@ public class ReaderControllerActivity extends FragmentActivity implements
         mReaderView.setOnPageListDidCompleteListener(new BCLReaderView.OnPageListDidCompleteListener() {
             @Override
             public void onPageListDidComplete() {
-                //crash
-                boolean doesScreenContainLocation = mReaderView.screenContainsLocation(new BCLLocation("epub_Hatadochalskad-10", "/4[epub_Hatadochalskad]/2/12,/1:1254,/1:1255"));
-                Log.i("ReaderControllerAct…", "PageListDidComplete: Does screen contain location? " + doesScreenContainLocation);
                 mOrderList = mReaderView.getPageListItems();
                 mSeekBar.setMax(mOrderList.size() - 1);
             }
@@ -268,30 +272,15 @@ public class ReaderControllerActivity extends FragmentActivity implements
         mReaderView.setOnReaderViewLocationDidChangeListener(new BCLReaderView.OnReaderViewLocationDidChangeListener() {
             @Override
             public void onReaderViewLocationDidChange(BCLLocation location) {
-                logAndShowLocation(location);
                 Log.i("ReaderControllerActivi…", "mReaderView.getLocation().getCfi(): " + mReaderView.getLocation().getCfi());
                 Log.i("ReaderControllerActivi…", "mReaderView.getLastVisibleLocation().getCfi(): " + mReaderView.getLastVisibleLocation().getCfi());
                 Log.i("ReaderControllerActivi…", "idref: " + location.getIdref());
                 Log.i("ReaderControllerActivi…", "cfi: " + location.getCfi());
                 Log.i("ReaderControllerActivi…", "estimatedChapterTitle: " + mReaderView.getEstimatedChapterTitle(location));
-                Log.i("ReaderControllerActivi…", "screenContainsLocation (current location): " + mReaderView.screenContainsLocation(location));
-                boolean doesScreenContainLocation = mReaderView.screenContainsLocation(new BCLLocation("epub_Hatadochalskad-10", "/4[epub_Hatadochalskad]/2/12,/1:1254,/1:1255"));
-                Log.i("ReaderControllerAct…", "Does screen contain location? " + doesScreenContainLocation);
+                Log.i("ReaderControllerActivi…", "screenContainsLocation: " + mReaderView.screenContainsLocation(location));
 
-
-                // Test locations for verifying screenContainsLocation functionality:
-
-                // With CFI:
-
-                //                BCLLocation testLocation = new BCLLocation("main1", "/4/2/2[section_77912]/4/12");
-                //                Log.i("ReaderControllerActivi…", "screenContainsLocation (\"/4/2/2[section_77912]/4/12\"): " + mReaderView.screenContainsLocation(testLocation));
-
-                // Without CFI:
-
-                //                BCLLocation testLocation = new BCLLocation("main1", "/4/2");
-                //                testLocation.setPercentageThroughSpineItem(0.51);
-                //                Log.i("ReaderControllerActivi…", "screenContainsLocation (percentageThroughSpineItem: 0.51): " + mReaderView.screenContainsLocation(testLocation));
-
+                mScreenCfi = mReaderView.getScreenCfi();
+                mScreenIdref = mReaderView.getScreenIdref();
 
                 if (location.getPageListItem() != null) {
                     mSeekBar.setProgress(location.getPageListItem().getOrderListIndex());
@@ -307,6 +296,32 @@ public class ReaderControllerActivity extends FragmentActivity implements
 
 
 
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        boolean isFixedLayout = mReaderView.isFixedLayout();
+                        FrameLayout bclReaderViewWrapper = (FrameLayout) findViewById(R.id.bcl_reader_view_wrapper);
+                        if (isFixedLayout) {
+                            mReaderView.setBodyBackgroundColor("#333");
+                            bclReaderViewWrapper.setBackgroundColor(0xFF333333);
+                        } else {
+                            mReaderView.setBodyBackgroundColor("#FFF");
+                            bclReaderViewWrapper.setBackgroundColor(0xFFFFFFFF);
+                        }
+                    }
+                });
+
+                updatePageDisplay(false);
+
+                JSONObject json = new JSONObject();
+                try {
+                    json.put("idref", location.getIdref());
+                    json.put("cfi", location.getCfi());
+                    json.put("percentageThroughSpineItem", location.getPercentageThroughSpineItem());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                String locationString = json.toString();
             }
         });
 
@@ -319,10 +334,6 @@ public class ReaderControllerActivity extends FragmentActivity implements
                 Log.i("ReaderControllerActivi…", "idref: " + location.getIdref());
                 Log.i("ReaderControllerActivi…", "cfi: " + location.getCfi());
                 Log.i("ReaderControllerActivi…", "text: " + text);
-
-                BCLPageListItem item = mReaderView.getPageList().getItemForLocation(location);
-                Log.i("ReaderControllerActivi…", "pagelist item label: " + item.getLabel());
-
             }
         });
 
@@ -346,12 +357,6 @@ public class ReaderControllerActivity extends FragmentActivity implements
     }
 
 
-    private void logAndShowLocation(BCLLocation location) {
-        String show1 = String.format("location = [idref : %1$s; cfi : %2$s]", location.getIdref(), location.getCfi());
-        Log.v(TAG, show1);
-        // Toast.makeText(ReaderControllerActivity.this, show1 + "\n" , Toast.LENGTH_LONG).show();
-    }
-
     // Action Bar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -362,10 +367,10 @@ public class ReaderControllerActivity extends FragmentActivity implements
             mSearchView = (SearchView) item.getActionView();
             mSearchMenuItem = item;
             mSearchView.setIconifiedByDefault(false); // Do not iconify the widget
+            mSearchView.setOnQueryTextListener(onQueryTextListener);
         }
         return super.onCreateOptionsMenu(menu);
     }
-
 
 
     @Override
@@ -389,6 +394,10 @@ public class ReaderControllerActivity extends FragmentActivity implements
     }
 
 
+    // Fixed layout
+    public boolean isFixedLayout() {
+        return mReaderView.isFixedLayout();
+    }
 
     // Page Slider
     /**
@@ -420,12 +429,11 @@ public class ReaderControllerActivity extends FragmentActivity implements
     /**
      * Update the page display to show the current page.
      */
-//    private void updatePageDisplay(boolean fromScrubber) {
+    private void updatePageDisplay(boolean fromScrubber) {
 //        Log.e(TAG, "[updatePageDisplay] page id info: "+mScreenIdref+mScreenCfi);
 //        Log.e(TAG, "[updatePageDisplay] mLookupMap is null? "+(mLookupMap==null?"true":"false"));
-////		BCLPageListItem pageListItem = null;
-//
 //        int idrefIndex = -1;
+//        mOrderedIdrefs = mReaderView.getOrderedIdrefs();
 //        for (int i = 0; i < mOrderedIdrefs.size(); i++) {
 //            String idref = mOrderedIdrefs.get(i);
 //            if (idref.matches(mScreenIdref)) {
@@ -433,23 +441,23 @@ public class ReaderControllerActivity extends FragmentActivity implements
 //                break;
 //            }
 //        }
-//
 //        Log.e(TAG, "[updatePageDisplay] idrefIndex: " + idrefIndex);
-//
-//        //		String lookupString = BookUtils.generateCfiLookupKey(mScreenIdref, mOrderedIdrefs, mScreenCfi);
-//        //		Cfi lookupCfi = new Cfi(lookupString);
-//
 //        String lookupString = "/" + idrefIndex + "/4/2";
 //        Cfi lookupCfi = new Cfi(lookupString);
-//
-//
 //        Log.e(TAG, "[updatePageDisplay] lookupString: " + lookupString);
-//
 //
 //        BCLPageListItem matchingPage = mLookupMap.get(lookupCfi);
 //        int matchingPageOrderListIndex = matchingPage.getOrderListIndex();
-//
-//
+
+        final BCLPageListItem matchingPage = mReaderView.getCurrentPageListItem();
+        if (matchingPage != null) {
+            runOnUiThread(new Runnable() {
+                public void run(){
+                    mPageDisplay.setText("Page " + matchingPage.getLabel() + " of " + mReaderView.getTotalPageListItemCount());
+                }
+            });
+        }
+
 //        String nextSpineItemString = "/" + (idrefIndex + 1) + "/4/2";
 //        Cfi nextSpineItemCfi = new Cfi(nextSpineItemString);
 //        BCLPageListItem nextSpineItemFirstPage = mLookupMap.get(nextSpineItemCfi);
@@ -467,14 +475,6 @@ public class ReaderControllerActivity extends FragmentActivity implements
 //            displayPageIndexForScrubber = matchingPageOrderListIndex + currentPageIndexInSpineItem;
 //        }
 //        Log.e(TAG, "[updatePageDisplay] displayPageIndexForScrubber: " + displayPageIndexForScrubber);
-//        JSONObject jsonData = new JSONObject();
-//        try {
-//            jsonData.put("pageNumber", displayPageIndexForScrubber + 1);
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//
-//        mCommunicator.respond(ReaderViewFragment.BCLReaderCommunicationType.PAGE_CHANGED, jsonData);
 //
 //        if(matchingPage != null && displayPageIndexForScrubber > -1 && displayPageIndexForScrubber < mOrderList.size()) {
 //            Log.e(TAG, "[updatePageDisplay] displayPageIndexForScrubber: " + displayPageIndexForScrubber);
@@ -497,7 +497,7 @@ public class ReaderControllerActivity extends FragmentActivity implements
 //                    updateScrubberPosition(0);
 //            }
 //        }
-//    }
+    }
 
     // Search
     /**
@@ -552,7 +552,7 @@ public class ReaderControllerActivity extends FragmentActivity implements
      * search results to keep the screen free of excess controls
      */
     public void closeSearchControl() {
-    	mSearchView.onActionViewCollapsed();
+        mSearchView.onActionViewCollapsed();
         hideSearchPanel();
         mSearchMenuItem.collapseActionView();
         // Hide soft keyboard
@@ -697,16 +697,23 @@ public class ReaderControllerActivity extends FragmentActivity implements
         }
     }
 
+
+    // Settings
     private BCLReaderSettings mViewerSettings;
     private static final String TAG = "ReaderControllerActiv…";
+
+    // Reader View
     private BCLReaderView mReaderView;
+
+    // Components
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     private LinearLayout mPageControl;
     private boolean mControlsVisible = false;
     private FrameLayout mLocationClickoffView = null;
-    private String mPath;
 
+    // Path to book
+    private String mPath;
 
     // Search Variables
     private MenuItem mSearchMenuItem;
@@ -730,4 +737,6 @@ public class ReaderControllerActivity extends FragmentActivity implements
     private SeekBar mSeekBar;
     private TextView mSliderPageInfo;
     private TextView mPageDisplay;
+    private String mScreenCfi;
+    private String mScreenIdref;
 }

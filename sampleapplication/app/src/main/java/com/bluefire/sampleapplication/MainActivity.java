@@ -57,7 +57,6 @@ import java.util.List;
 
 import org.readium.sdk.android.Container;
 
-import com.bluefire.bclreader.publicclasses.BCLReaderInitializer;
 
 import android.app.Activity;
 import android.content.Context;

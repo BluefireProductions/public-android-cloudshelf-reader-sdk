@@ -29,6 +29,7 @@
 
 package com.bluefire.sampleapplication;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -47,76 +48,83 @@ import com.bluefire.bclreader.publicclasses.BCLReaderSettings;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-
 /**
  * This dialog displays the viewer settings to the user.
  *
  */
+@SuppressLint("ValidFragment")
 public class ViewerSettingsDialog extends DialogFragment {
-	
-	/**
-	 * Interface to notify the listener when a viewer settings have been changed.
-	 */
-	public interface OnViewerSettingsChange {
-		public void onViewerSettingsChange(BCLReaderSettings settings);
-	}
 
-	protected static final String TAG = "ViewerSettingsDialog";
-	
-	private OnViewerSettingsChange mListener;
+    /**
+     * Interface to notify the listener when a viewer settings have been changed.
+     */
+    public interface OnViewerSettingsChange {
+        public void onViewerSettingsChange(BCLReaderSettings settings);
+    }
 
-	private BCLReaderSettings mOriginalSettings;
-	
-	public ViewerSettingsDialog(OnViewerSettingsChange listener, BCLReaderSettings originalSettings) {
-		mListener = listener;
-		mOriginalSettings = originalSettings;
-	}
+    protected static final String TAG = "ViewerSettingsDialog";
 
-	@Override
-	public Dialog onCreateDialog(
-			Bundle savedInstanceState) {
+    private OnViewerSettingsChange mListener;
+
+    private BCLReaderSettings mOriginalSettings;
+
+    public ViewerSettingsDialog(OnViewerSettingsChange listener, BCLReaderSettings originalSettings) {
+        mListener = listener;
+        mOriginalSettings = originalSettings;
+    }
+
+    @Override
+    public Dialog onCreateDialog(
+            Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
-        final View dialogView = inflater.inflate(R.layout.viewer_settings, null);
-
-        // Text Size
-        final NumberPicker textSizeNumberPicker = (NumberPicker) dialogView.findViewById(R.id.fontSize);
-        textSizeNumberPicker.setWrapSelectorWheel(false);
-        textSizeNumberPicker.setMinValue(0);
-        textSizeNumberPicker.setMaxValue(35);
-        String[] textSizeDisplayedValues = new String[36];
-        int textSizeNumberPickerValue = 50;
-        int textSize =  (int) mOriginalSettings.getTextScale();
-        for(int i = 0; i < 36; i++) {
-            if (textSize == textSizeNumberPickerValue) {
-                textSizeNumberPicker.setValue(i);
-            }
-            textSizeDisplayedValues[i] = textSizeNumberPickerValue + "%";
-            textSizeNumberPickerValue = (textSizeNumberPickerValue + 10);
+        // Inflate correct settings into settings fragment wrapper (either reflowable or FXL)
+        View v;
+        final boolean isFixedLayout = ((ReaderControllerActivity) getActivity()).isFixedLayout();
+        if (isFixedLayout) {
+            v = inflater.inflate(R.layout.viewer_settings_fixed_layout, null);
+        } else {
+            v = inflater.inflate(R.layout.viewer_settings, null);
         }
-        textSizeNumberPicker.setDisplayedValues(textSizeDisplayedValues);
 
+        final View dialogView = v;
 
-        // Margin Width
-        final NumberPicker marginWidthNumberPicker = (NumberPicker) dialogView.findViewById(R.id.marginWidth);
-        marginWidthNumberPicker.setWrapSelectorWheel(false);
-        marginWidthNumberPicker.setMinValue(0);
-        marginWidthNumberPicker.setMaxValue(6);
-        String[] marginWidthDisplayedValues = new String[7];
-        double marginWidthNumberPickerValue = 0;
-        double marginWidth =  mOriginalSettings.getMarginAmount();
-        for(int i = 0; i < 7; i++) {
-            if (marginWidth == marginWidthNumberPickerValue) {
-                marginWidthNumberPicker.setValue(i);
+        NumberPicker textSizeNumberPicker = new NumberPicker(getContext());
+        NumberPicker marginWidthNumberPicker = new NumberPicker(getContext());
+        RadioGroup themeGroup = new RadioGroup(getContext());
+        CheckBox justifiedText = new CheckBox(getContext());
+
+        if (!isFixedLayout) {
+
+            // Text Size
+            textSizeNumberPicker = (NumberPicker) dialogView.findViewById(R.id.fontSize);
+            textSizeNumberPicker.setValue((int) mOriginalSettings.getTextScale());
+
+            // Margin Width
+            marginWidthNumberPicker = (NumberPicker) dialogView.findViewById(R.id.marginWidth);
+            marginWidthNumberPicker.setValue((int) (mOriginalSettings.getMarginAmount() * 10));
+
+            // Theme
+            themeGroup = (RadioGroup) dialogView.findViewById(R.id.themeSettings);
+            switch (mOriginalSettings.getTheme()) {
+                case BCL_READER_THEME_DEFAULT:
+                    themeGroup.check(R.id.themeDefault);
+                    break;
+                case BCL_READER_THEME_NIGHT:
+                    themeGroup.check(R.id.themeNight);
+                    break;
+                case BCL_READER_THEME_SEPIA:
+                    themeGroup.check(R.id.themeSepia);
+                    break;
             }
-            double marginWidthDisplayedValue = new BigDecimal(Double.toString(marginWidthNumberPickerValue)).setScale(2, RoundingMode.HALF_UP).doubleValue();
-            marginWidthDisplayedValues[i] = Double.toString(marginWidthDisplayedValue);
-            marginWidthNumberPickerValue = (marginWidthNumberPickerValue + 0.1);
-        }
-        marginWidthNumberPicker.setDisplayedValues(marginWidthDisplayedValues);
 
+            // Justified Text
+            justifiedText = (CheckBox) dialogView.findViewById(R.id.checkbox_justified_text);
+            justifiedText.setChecked(mOriginalSettings.getIsTextAlignmentJustified());
+
+        }
 
         // Columns
         final RadioGroup spreadGroup = (RadioGroup) dialogView.findViewById(R.id.spreadSettings);
@@ -132,28 +140,17 @@ public class ViewerSettingsDialog extends DialogFragment {
                 break;
         }
 
-        // Theme
-        final RadioGroup themeGroup = (RadioGroup) dialogView.findViewById(R.id.themeSettings);
-        switch (mOriginalSettings.getTheme()) {
-            case BCL_READER_THEME_DEFAULT:
-                themeGroup.check(R.id.themeDefault);
-                break;
-            case BCL_READER_THEME_NIGHT:
-                themeGroup.check(R.id.themeNight);
-                break;
-            case BCL_READER_THEME_SEPIA:
-                themeGroup.check(R.id.themeSepia);
-                break;
-        }
-
-
-        // Justified Text
-        final CheckBox justifiedText = (CheckBox) dialogView.findViewById(R.id.checkbox_justified_text);
-        justifiedText.setChecked(mOriginalSettings.getIsTextAlignmentJustified());
 
         // Media Overlay: Tap to Play
         final CheckBox tapToPlay = (CheckBox) dialogView.findViewById(R.id.checkbox_tap_to_play);
         tapToPlay.setChecked(mOriginalSettings.getIsMediaOverlayTapToPlayEnabled());
+
+        final NumberPicker dialogTextSizeNumberPicker = textSizeNumberPicker;
+        final NumberPicker dialogMarginWidthNumberPicker = marginWidthNumberPicker;
+        final RadioGroup dialogThemeGroup = themeGroup;
+        final CheckBox dialogJustifiedText = justifiedText;
+
+
 
         builder.setView(dialogView)
                 .setTitle(R.string.settings)
@@ -161,17 +158,35 @@ public class ViewerSettingsDialog extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         if (mListener != null) {
-                            // Text Scale
-                            String[] textScaleDisplayedValues = textSizeNumberPicker.getDisplayedValues();
-                            int textScaleDisplayedValueIndex = textSizeNumberPicker.getValue();
-                            String textScaleDisplayedValue = textScaleDisplayedValues[textScaleDisplayedValueIndex].split("%")[0];
-                            double textScale = (double) Integer.parseInt(textScaleDisplayedValue);
+                            double textScale = 100;
+                            double marginAmount = 0;
+                            BCLReaderSettings.BCLReaderTheme theme = BCLReaderSettings.BCLReaderTheme.BCL_READER_THEME_DEFAULT;
+                            boolean isTextAlignmentJustified = false;
 
-                            // Margin Width
-                            String[] marginWidthDisplayedValues = marginWidthNumberPicker.getDisplayedValues();
-                            int marginWidthDisplayedValueIndex = marginWidthNumberPicker.getValue();
-                            String marginWidthDisplayedValue = marginWidthDisplayedValues[marginWidthDisplayedValueIndex];
-                            double marginAmount = Double.parseDouble(marginWidthDisplayedValue);
+                            if (!isFixedLayout) {
+                                // Text Scale
+                                textScale = dialogTextSizeNumberPicker.getValue();
+
+                                // Margin Width
+                                marginAmount = dialogMarginWidthNumberPicker.getValue();
+
+                                // Theme
+                                theme = null;
+                                switch (dialogThemeGroup.getCheckedRadioButtonId()) {
+                                    case R.id.themeDefault:
+                                        theme = BCLReaderSettings.BCLReaderTheme.BCL_READER_THEME_DEFAULT;
+                                        break;
+                                    case R.id.themeNight:
+                                        theme = BCLReaderSettings.BCLReaderTheme.BCL_READER_THEME_NIGHT;
+                                        break;
+                                    case R.id.themeSepia:
+                                        theme = BCLReaderSettings.BCLReaderTheme.BCL_READER_THEME_SEPIA;
+                                        break;
+                                }
+
+
+                                isTextAlignmentJustified = dialogJustifiedText.isChecked();
+                            }
 
                             // Column Mode
                             BCLReaderSettings.BCLReaderColumnMode columnMode = null;
@@ -187,25 +202,10 @@ public class ViewerSettingsDialog extends DialogFragment {
                                     break;
                             }
 
-                            // Theme
-                            BCLReaderSettings.BCLReaderTheme theme = null;
-                            switch (themeGroup.getCheckedRadioButtonId()) {
-                                case R.id.themeDefault:
-                                    theme = BCLReaderSettings.BCLReaderTheme.BCL_READER_THEME_DEFAULT;
-                                    break;
-                                case R.id.themeNight:
-                                    theme = BCLReaderSettings.BCLReaderTheme.BCL_READER_THEME_NIGHT;
-                                    break;
-                                case R.id.themeSepia:
-                                    theme = BCLReaderSettings.BCLReaderTheme.BCL_READER_THEME_SEPIA;
-                                    break;
-                            }
 
-
-                            boolean isTextAlignmentJustified = justifiedText.isChecked();
                             boolean isMediaOverlayTapToPlayEnabled = tapToPlay.isChecked();
 
-                            BCLReaderSettings settings = new BCLReaderSettings(columnMode, isMediaOverlayTapToPlayEnabled, isTextAlignmentJustified, marginAmount, textScale, theme);
+                            BCLReaderSettings settings = new BCLReaderSettings(columnMode, isMediaOverlayTapToPlayEnabled, isTextAlignmentJustified, marginAmount * 0.1, textScale, theme);
                             mListener.onViewerSettingsChange(settings);
                         }
                         dismiss();
@@ -222,11 +222,11 @@ public class ViewerSettingsDialog extends DialogFragment {
                 })
                 .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                       dismiss();
+                        dismiss();
                     }
                 });
 
         return builder.create();
-	}
+    }
 
 }
