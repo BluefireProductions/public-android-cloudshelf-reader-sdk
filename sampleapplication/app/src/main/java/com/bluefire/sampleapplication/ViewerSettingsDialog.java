@@ -98,13 +98,42 @@ public class ViewerSettingsDialog extends DialogFragment {
 
         if (!isFixedLayout) {
 
+
             // Text Size
             textSizeNumberPicker = (NumberPicker) dialogView.findViewById(R.id.fontSize);
-            textSizeNumberPicker.setValue((int) mOriginalSettings.getTextScale());
+            textSizeNumberPicker.setWrapSelectorWheel(false);
+            textSizeNumberPicker.setMinValue(0);
+            textSizeNumberPicker.setMaxValue(35);
+            String[] textSizeDisplayedValues = new String[36];
+            int textSizeNumberPickerValue = 50;
+            int textSize =  (int) mOriginalSettings.getTextScale();
+            for(int i = 0; i < 36; i++) {
+                if (textSize == textSizeNumberPickerValue) {
+                    textSizeNumberPicker.setValue(i);
+                }
+                textSizeDisplayedValues[i] = textSizeNumberPickerValue + "%";
+                textSizeNumberPickerValue = (textSizeNumberPickerValue + 10);
+            }
+            textSizeNumberPicker.setDisplayedValues(textSizeDisplayedValues);
+
 
             // Margin Width
             marginWidthNumberPicker = (NumberPicker) dialogView.findViewById(R.id.marginWidth);
-            marginWidthNumberPicker.setValue((int) (mOriginalSettings.getMarginAmount() * 10));
+            marginWidthNumberPicker.setWrapSelectorWheel(false);
+            marginWidthNumberPicker.setMinValue(0);
+            marginWidthNumberPicker.setMaxValue(6);
+            String[] marginWidthDisplayedValues = new String[7];
+            double marginWidthNumberPickerValue = 0;
+            double marginWidth =  mOriginalSettings.getMarginAmount();
+            for(int i = 0; i < 7; i++) {
+                if (marginWidth == marginWidthNumberPickerValue) {
+                    marginWidthNumberPicker.setValue(i);
+                }
+                double marginWidthDisplayedValue = new BigDecimal(Double.toString(marginWidthNumberPickerValue)).setScale(2, RoundingMode.HALF_UP).doubleValue();
+                marginWidthDisplayedValues[i] = Double.toString(marginWidthDisplayedValue);
+                marginWidthNumberPickerValue = (marginWidthNumberPickerValue + 0.1);
+            }
+            marginWidthNumberPicker.setDisplayedValues(marginWidthDisplayedValues);
 
             // Theme
             themeGroup = (RadioGroup) dialogView.findViewById(R.id.themeSettings);
@@ -165,10 +194,17 @@ public class ViewerSettingsDialog extends DialogFragment {
 
                             if (!isFixedLayout) {
                                 // Text Scale
-                                textScale = dialogTextSizeNumberPicker.getValue();
+                                String[] textScaleDisplayedValues = dialogTextSizeNumberPicker.getDisplayedValues();
+                                int textScaleDisplayedValueIndex = dialogTextSizeNumberPicker.getValue();
+                                String textScaleDisplayedValue = textScaleDisplayedValues[textScaleDisplayedValueIndex].split("%")[0];
+                                textScale = (double) Integer.parseInt(textScaleDisplayedValue);
 
                                 // Margin Width
-                                marginAmount = dialogMarginWidthNumberPicker.getValue();
+                                String[] marginWidthDisplayedValues = dialogMarginWidthNumberPicker.getDisplayedValues();
+                                int marginWidthDisplayedValueIndex = dialogMarginWidthNumberPicker.getValue();
+                                String marginWidthDisplayedValue = marginWidthDisplayedValues[marginWidthDisplayedValueIndex];
+                                marginAmount = Double.parseDouble(marginWidthDisplayedValue);
+
 
                                 // Theme
                                 theme = null;

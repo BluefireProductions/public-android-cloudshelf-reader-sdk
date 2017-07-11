@@ -305,8 +305,16 @@ public class ReaderControllerActivity extends FragmentActivity implements
                             mReaderView.setBodyBackgroundColor("#333");
                             bclReaderViewWrapper.setBackgroundColor(0xFF333333);
                         } else {
-                            mReaderView.setBodyBackgroundColor("#FFF");
-                            bclReaderViewWrapper.setBackgroundColor(0xFFFFFFFF);
+                            if (mViewerSettings.getTheme() == BCLReaderSettings.BCLReaderTheme.BCL_READER_THEME_DEFAULT) {
+                                mReaderView.setBodyBackgroundColor("#FFF");
+                                bclReaderViewWrapper.setBackgroundColor(0xFFFFFFFF);
+                            } else if (mViewerSettings.getTheme() == BCLReaderSettings.BCLReaderTheme.BCL_READER_THEME_NIGHT) {
+                                mReaderView.setBodyBackgroundColor("#000");
+                                bclReaderViewWrapper.setBackgroundColor(0xFF000000);
+                            } else if (mViewerSettings.getTheme() == BCLReaderSettings.BCLReaderTheme.BCL_READER_THEME_SEPIA) {
+                                mReaderView.setBodyBackgroundColor("#e7dec7");
+                                bclReaderViewWrapper.setBackgroundColor(0xFFE7DEC7);
+                            }
                         }
                     }
                 });
