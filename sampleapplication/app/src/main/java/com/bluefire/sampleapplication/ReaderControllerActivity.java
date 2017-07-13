@@ -278,6 +278,13 @@ public class ReaderControllerActivity extends FragmentActivity implements
                 Log.i("ReaderControllerActivi…", "cfi: " + location.getCfi());
                 Log.i("ReaderControllerActivi…", "estimatedChapterTitle: " + mReaderView.getEstimatedChapterTitle(location));
                 Log.i("ReaderControllerActivi…", "screenContainsLocation: " + mReaderView.screenContainsLocation(location));
+                if (mReaderView.getPageList() != null) {
+                    BCLPageList pageList = mReaderView.getPageList();
+                    BCLPageListItem pageListItem = pageList.getItemForLocation(mReaderView.getLocation());
+                    if (pageListItem != null) {
+                        Log.i("ReaderControllerActivi…", "getItemForLocation returns idref: " + pageListItem.getIdref() + " cfi: " + pageListItem.getCfi());
+                    }
+                }
 
                 mScreenCfi = mReaderView.getScreenCfi();
                 mScreenIdref = mReaderView.getScreenIdref();
